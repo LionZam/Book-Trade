@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BookTrade:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="BookTrade-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="BookTrade:war exploded" />
+    </root>
+  </artifact>
+</component>
