@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
+    <link rel="icon" href="../Books.ico">
 
     <title>Мой профиль</title>
 
@@ -20,7 +20,8 @@
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="${pageContext.request.contextPath}/profile">Book Trade</a>
-    <input class="form-control form-control-dark w-100 search" type="text" id="search" placeholder="Search" aria-label="Search">
+    <input class="form-control form-control-dark w-100 search" type="text" id="search" placeholder="Search"
+           aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="#">Sign out</a>
@@ -34,7 +35,7 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/profile">
                             <span data-feather="home"></span>
                             Мои книги <span class="sr-only">(current)</span>
                         </a>
@@ -70,6 +71,9 @@
                 <div class="container">
                     <div class="row books">
                         <div id="loader"></div>
+                        <div class="col">
+                            <p class="text-center font-weight-light font-italic">Тут пока ничего</p>
+                        </div>
                     </div>
                 </div>
             </div>

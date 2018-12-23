@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import ru.itis.GoodReads.GoodReadsRequest;
 import ru.itis.models.Basket;
 import ru.itis.models.Book;
 import ru.itis.repositories.*;
@@ -25,6 +26,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -33,6 +35,8 @@ public class BooksJson extends HttpServlet {
     private UsersService usersService;
     private UsersRepository usersRepository;
     private ObjectMapper objectMapper = new ObjectMapper();
+    GoodReadsRequest goodReadsRequest;
+
 
     @Override
     public void init() throws ServletException {
@@ -44,6 +48,7 @@ public class BooksJson extends HttpServlet {
         usersRepository = new UsersRepositoryJdbcTemplateImpl(dataSource);
         AuthRepository authRepository = new AuthRepositoryImpl(dataSource);
         usersService = new UsersServiceImpl(usersRepository, authRepository);
+        goodReadsRequest = new GoodReadsRequest();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
@@ -55,20 +60,9 @@ public class BooksJson extends HttpServlet {
         if (authCookie != null) {
             if (usersService.isExistByCookie(authCookie.getValue())) {
                 Basket basket = usersRepository.findByCookie(authCookie.getValue()).getBasket();
-                boolean flag = true;
-                StringBuilder resultBuilder = new StringBuilder("[");
-                for (Book book : basket.getBooks()) {
-                    if (flag) {
-                        flag = false;
-                    } else {
-                        resultBuilder.append(",");
-                    }
-                    resultBuilder.append(getBookFromSite(book));
-                }
-                resultBuilder.append("]");
-                //String json = objectMapper.writeValueAsString(result);
+                String json = objectMapper.writeValueAsString(basket.getBooks());
                 response.setContentType("application/json; charset=UTF-8");
-                response.getWriter().write(resultBuilder.toString());
+                response.getWriter().write(json);
             }
         }
     }
@@ -84,7 +78,7 @@ public class BooksJson extends HttpServlet {
         return null;
     }
 
-    private String getBookFromSite(Book book) throws IOException {
+/*    private String getBookFromSite(Book book) throws IOException {
         URL yahoo = new URL("https://www.goodreads.com/book/show/" + book.getId() + ".xml?key=VWFKgYW1DOphdMHFBQQt4Q");
         URLConnection yc = yahoo.openConnection();
         BufferedReader in = new BufferedReader(
@@ -110,5 +104,5 @@ public class BooksJson extends HttpServlet {
             System.out.println(je.toString());
         }
         return jsonPrettyPrintString;
-    }
+    }*/
 }

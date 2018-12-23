@@ -1,141 +1,73 @@
 $(document).ready(function () {
-    function getUserBooks() {
+    function getBooks(method, url) {
         $.ajax({
-            method: "GET",
+            method: method,
             dataType: "json",
-            url: "/books.json",
+            url: url,
             beforeSend: function () {
+                $(".books .col-md-3").remove();
+                $(".books .col").remove();
                 $('#loader').show();
             },
         })
             .done(function (books) {
                 $('#loader').hide();
                 console.log(books);
-                printMyBooks(books)
+                printBooks(books)
             })
     }
 
-    getUserBooks();
+    getBooks("GET", "/books.json");
 
-    /*$('button').click(function () {
-        var bookId = $(this).attr("id");
-        $.ajax({
-            method: "POST",
-            url: "/shop",
-            data: {id: bookId}
-        })
-            .done(function (data) {
-                getUserBooks();
-            });
-    });*/
-
-    function printBook(input) {
-        let book = input;
-        let result = "<div class=\"col-md-3\">\n" +
-            "    <div class=\"card mb-4 shadow-sm\">\n" +
-            "        <div class=\"img-box\">\n" +
-            "            <img class=\"card-img-top\" src=\"" + book["image_url"] + "\" alt=\"Card image cap\">\n" +
-            "        </div>\n" +
-            "        <div class=\"card-body\">\n" +
-            "            <p class=\"h3\">" + book["work"]["original_title"] + "</p>\n" +
-            // "            <p class=\"h4\">" + book["authors"][0]["name"] + "</p>\n" +
-            "            <p class=\"card-text\">" + book["description"].substring(0, 150) + "..." + "</p>\n" +
-            "            <div class=\"d-flex justify-content-between align-items-center\">\n" +
-            "                <div class=\"btn-group\">\n" +
-            "                    <button type=\"button\" class=\"btn btn-sm btn-outline-danger\">Удалить</button>\n" +
-            "                    <button type=\"button\" class=\"btn btn-sm btn-outline-success\" id=\"add\" data-id=\" " + book["id"] + " \">Добавить еще одну</button>\n" +
-            "                    <small class=\"text-muted\">" + book["count"] + "</small>\n" +
-            "                </div>\n" +
-            "            </div>\n" +
-            "        </div>\n" +
-            "    </div>\n" +
-            "</div>";
-        if ($(".books").not(':has(.col-md-3)')) {
-            $(".books").append(result)
-        } else {
-            $(".books .col-md-3:last").after().fadeIn(result)
-        }
-    }
-
-    $("#add").click(function () {
-        e.preventDefault();
-        var bookId = $(this).attr("data-id");
-        console.log("asfsdfsd");
-        alert(bookId);
-        $.ajax({
-            method: "POST",
-            url: "/profile",
-            data: {id: bookId}
-        }).done(function (books) {
-            printMyBooks(books)
-        });
-    });
-
-    /*$('.delete-book').click(function () {
-        var bookId = $(this).attr("id");
-        $.ajax({
-            method: "POST",
-            url: "/shop",
-            data: {id: bookId}
-        })
-    });*/
-
-    $("#search").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $.ajax({
-                method: "GET",
-                dataType: "json",
-                url: "/books/search",
-                data: {q: this.value},
-                beforeSend: function () {
-                    $('#loader').show();
-                },
-            })
-                .done(function (books) {
-                    console.log(books);
-                    $('#loader').hide();
-                    printSearchBooks(books["work"])
-                });
-        }
-    });
-
-    function printSearchBooks(books) {
-        $(".books .col-md-3").remove();
-        $.each(books, function (index, book) {
-            printSearchBook(book["best_book"]);
-        })
-    }
-
-    function printSearchBook(input) {
-        let book = input;
-        let result = "<div class=\"col-md-3\">\n" +
-            "    <div class=\"card mb-4 shadow-sm\">\n" +
-            "        <div class=\"img-box\">\n" +
-            "            <img class=\"card-img-top\" src=\"" + book["image_url"] + "\" alt=\"Card image cap\">\n" +
-            "        </div>\n" +
-            "        <div class=\"card-body\">\n" +
-            "            <p class=\"h5\">" + book["title"] + "</p>\n" +
-            "            <p class=\"h6\">" + book["author"]["name"] + "</p>\n" +
-            "            <div class=\"d-flex justify-content-between align-items-center\">\n" +
-            "                <div class=\"btn-group\">\n" +
-            "                    <button type=\"button\" class=\"btn btn-sm btn-outline-success add-book\" id=\"add\" data-id=\" " + book["id"] + " \">Добавить к себе</button>\n" +
-            "                </div>\n" +
-            "            </div>\n" +
-            "        </div>\n" +
-            "    </div>\n" +
-            "</div>";
-        console.log(result);
-        if ($(".books").not(':has(.col-md-3)')) {
-            $(".books").append(result)
-        } else {
-            $(".books .col-md-3:last").after(result)
-        }
-    }
-
-    function printMyBooks(books) {
-        $(".books .col-md-3").remove();
+    function printBooks(books) {
         $.each(books, function (index, book) {
             printBook(book);
         })
+    }
+
+    $('button').on("click", function () {
+        getBooks("POST", "/profile?id=" + $(this).attr("data-id"));
+    });
+
+    $("#search").keyup(function (event) {
+        if (event.keyCode === 13) {
+            getBooks("GET", "/books/search?q=" + this.value);
+            currentItem("books");
+        }
+    });
+
+    function currentItem() {
+        $("h1").text("Результат");
+        $(".nav-item > .nav-link").removeClass("active");
+        $(".nav :nth-child(3)").children().eq(0).addClass("active");
+
+    }
+
+    function printBook(input) {
+        let book = input;
+        let description = book["description"] === undefined ? " " : book["description"].substring(0, 150) + "...";
+        let numPages = book["numPages"] === undefined ? " " : book["numPages"] + " страницы";
+        let count = book["count"] === undefined ? " " : book["count"];
+        let result = "<div class=\"col-md-3\">\n" +
+            "    <div class=\"card mb-4 shadow-sm\">\n" +
+            "        <div class=\"img-box\">\n" +
+            "            <img class=\"card-img-top\" src=\"" + book["imageUrl"] + "\" alt=\"Card image cap\">\n" +
+            "        </div>\n" +
+            "        <div class=\"card-body\">\n" +
+            "            <p class=\"h3\">" + book["title"] + "</p>\n" +
+            // "            <p class=\"h4\">" + book["authors"][0]["name"] + "</p>\n" +
+            "            <p class=\"card-text\">" + description + "</p>\n" +
+            "            <p class=\"card-text\">" + numPages + "</p>\n" +
+            "            <div class=\"d-flex justify-content-between align-items-center \">\n" +
+            "                <div class=\"btn-group\">\n" +
+            "                    <button type=\"button\" class=\"btn btn-sm btn-outline-danger\">Удалить</button>\n" +
+            "                    <button type=\"button\" class=\"btn btn-sm btn-outline-success\" id=\"add-book\" data-id=\" " + book["id"] + " \">Добавить</button>\n" +
+            "                    <small class=\"text-muted\">" + count + "</small>\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>";
+        $(".books").append(result)
     }
 });

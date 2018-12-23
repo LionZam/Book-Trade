@@ -1,0 +1,310 @@
+
+a {
+    color: #ffffff;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+
+}
+
+a:visited {
+    color: #ffffff;
+}
+
+a:active {
+    color: #ffffff;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    list-style: none;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+
+}
+
+#main {
+    width: 100%;
+    height: 700px;
+    background-image: url("../img/book.png"), linear-gradient(40deg, #17a77b, #74c947);
+    background-repeat: no-repeat, no-repeat;
+    background-position: left;
+}
+
+.forscroll{
+    height: 0px;
+}
+.navbar-wrapper {
+    padding: 15px 0;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+.is-sticky{
+    background: #363f41;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    -webkit-box-shadow: -1px 10px 33px -13px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: -1px 10px 33px -13px rgba(0, 0, 0, 0.59);
+    box-shadow: -1px 10px 33px -13px rgba(0, 0, 0, 0.59);
+}
+.top-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    list-style: none;
+    white-space: nowrap;
+    padding-left: 15px;
+    font-size: 15px;
+    padding-top: 6px;
+}
+
+.top-nav li {
+    font-family: "AvenirNextCyr-Bold", sans-serif;
+    margin-right: 15px;
+}
+
+.top-nav li {
+    text-decoration: none;
+    position: relative;
+}
+
+.top-nav li:before {
+    position: absolute;
+    content: " ";
+    border-bottom: 1px solid #ccc;
+    transform: scale(0, 1);
+    width: 100%;
+    bottom: 0;
+    transition: transform 0.3s
+}
+
+.top-nav li:hover:before {
+    transform: scale(1, 1);
+    color: #fff;
+}
+
+.user-actions {
+    list-style: none;
+    white-space: nowrap;
+    display: block;
+    padding-right: 20px;
+    font-size: 15px;
+}
+
+.user-actions li {
+    display: inline-block;
+}
+
+.user-actions .login {
+    font-family: "AvenirNextCyr-Bold", sans-serif;
+    padding-right: 40px;
+}
+
+.user-actions .sign-up {
+    font-family: "AvenirNextCyr", sans-serif;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    padding: 8px 40px;
+    transition: background .25s ease-in-out, color .25s ease-in-out;
+
+}
+
+.user-actions .sign-up:hover {
+    background-color: #fff;
+    color: #363f41;
+}
+
+.text-container {
+    left: 70px;
+    top: 150px;
+    position: relative;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.text-container h3 {
+    font-family: "AvenirNextCyr-Bold", sans-serif;
+    font-size: 56px;
+    max-width: 400px;
+    line-height: 55px;
+
+}
+
+.text-container h4 {
+    font-family: "AvenirNextCyr", sans-serif;
+    font-size: 30px;
+    letter-spacing: -1px;
+    line-height: 25px;
+    margin-bottom: 30px;
+
+}
+
+.text-container .get-started {
+    font-family: "AvenirNextCyr", sans-serif;
+    color: #17a77b;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    padding: 10px 40px;
+    background: #ffffff;
+    transition: background .5s ease-in-out, color .5s ease-in-out;
+    text-decoration: none;
+}
+
+.image-container {
+    display: inline-block;
+    position: relative;
+}
+
+.text-container .get-started:hover {
+    color: #fff;
+    background: transparent;
+}
+
+.image-container .books {
+    width: 600px;
+    position: relative;
+    top: 50px;
+}
+
+#table{
+    padding: 50px 0;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background: url("../img/example.png") no-repeat;
+    height: 800px;
+    background-size: 60% ;
+    background-position: 50% 150px;
+}
+#table h3{
+    font-family: "AvenirNextCyr-Bold", sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+#table .bookmark{
+    position: absolute;
+    width: 70px;
+    left:50%;
+    top:-30.4px;
+}
+
+/* Contacts */
+
+#contacts {
+    position: relative;
+    background: #252424;
+    color: #ececec;
+    padding: 40px 0 10px 10px;
+}
+
+.number {
+    font-size: 25px;
+    font-family: "Exo 2";
+    font-weight: bold;
+}
+
+.mail {
+    font-size: 20px;
+    margin-top: -10px;
+    font-family: "Exo 2";
+    font-weight: bold;
+}
+
+.social .icon {
+    font-size: 2rem;
+    position: relative;
+    bottom: 4px;
+}
+
+.designedby {
+    font-size: 12px;
+    padding-top: 50px;
+}
+
+.designedby img {
+    width: 20px;
+    height: 20px;
+}
+
+.box {
+    position: relative;
+    vertical-align: middle;
+    color: #ffffff;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    transition: 0.5s;
+    width: 70px;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    -webkit-transition: 0.5s;
+}
+
+.box:hover {
+    border: 2px solid rgba(0, 160, 80, 0);
+    color: #000000;
+}
+
+.box:hover .icon {
+    color: #000000;
+    -webkit-transition: 0.5s;
+
+}
+
+.box::before, .box::after {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    -webkit-transform: scale(0);
+    transition: 0.5s;
+}
+
+.foo::before {
+    border-bottom: 3px solid #000000;
+    border-left: 3px solid #000000;
+    -webkit-transform-origin: 0 100%;
+}
+
+.foo::after {
+    border-top: 3px solid #000000;
+    border-right: 3px solid #000000;
+    -webkit-transform-origin: 100% 0%;
+}
+
+.box:hover::after, .box:hover::before {
+    -webkit-transform: scale(1);
+}
+
+
+

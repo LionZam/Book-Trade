@@ -4,16 +4,18 @@ import lombok.SneakyThrows;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import ru.itis.GoodReads.GoodReadsRequest;
 import ru.itis.models.Book;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class BooksRepository implements CrudRepository{
 
     private JdbcTemplate jdbcTemplate;
-
+    private GoodReadsRequest goodReadsRequest;
     //language=SQL
     private static final String SQL_SELECT_USER_BOOKS_BY_ID =
             "select * from user_books where user_id = ?";
@@ -21,12 +23,14 @@ public class BooksRepository implements CrudRepository{
     @SneakyThrows
     public BooksRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        goodReadsRequest = new GoodReadsRequest();
     }
 
-    private RowMapper<Book> bookMapper = (resultSet, i) -> Book.builder()
-            .id(resultSet.getLong("book_id"))
-            .count(resultSet.getInt("count"))
-            .build();
+    private RowMapper<Book> bookMapper = (resultSet, i) -> {
+        Book book = goodReadsRequest.getBookById(resultSet.getLong("book_id"), new HashMap<>());
+        book.setCount(resultSet.getInt("count"));
+        return book;
+    };
 
     public List<Book> findUserBooks(Long userId){
         try {

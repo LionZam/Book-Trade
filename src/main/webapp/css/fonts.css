@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('../fonts/Open Sans Bold/OpenSansBold.eot');
+    src: url('../fonts/Open Sans Bold/OpenSansBold.eot') format('embedded-opentype'),
+    url('../fonts/Open Sans Bold/OpenSansBold.woff2') format('woff2'),
+    url('../fonts/Open Sans Bold/OpenSansBold.woff') format('woff'),
+    url('../fonts/Open Sans Bold/OpenSansBold.ttf') format('truetype'),
+    url('../fonts/Open Sans Bold/OpenSansBold.svg#OpenSansBold') format('svg');
+}
+@font-face {
+    font-family: 'AvenirNextCyr';
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Regular.eot');
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Regular.eot') format('embedded-opentype'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Regular.woff') format('woff'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'AvenirNextCyr-Bold';
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Bold.eot');
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Bold.eot') format('embedded-opentype'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Bold.woff') format('woff'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'AvenirNextCyr-Light';
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Light.eot');
+    src: url('../fonts/AvenirNextCyr/AvenirNextCyr-Light.eot') format('embedded-opentype'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Light.woff') format('woff'),
+    url('../fonts/AvenirNextCyr/AvenirNextCyr-Light.ttf') format('truetype');
+}
