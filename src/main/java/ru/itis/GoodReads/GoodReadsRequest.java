@@ -6,8 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.http.ResponseEntity;
 import ru.itis.DTOs.BookFromSearch;
 import ru.itis.models.Book;
+import org.springframework.web.client.RestTemplate;
+
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -69,12 +72,12 @@ public class GoodReadsRequest {
     }
 
     private JSONObject sendRequest(URL url, HashMap<String, String> parameters) throws IOException {
-        URLConnection con = new URL(url.toString()+ParameterStringBuilder.getParamsString(parameters)).openConnection();
+        String endURl = url.toString()+ParameterStringBuilder.getParamsString(parameters);
+
+/*        URLConnection con = endURl.openConnection();
         con.setDoOutput(true);
         con.setRequestProperty("charset", "UTF-8");
         con.setRequestProperty("Accept-Charset", "UTF-8");
-
-
 
         //Get Response
         InputStream is = con.getInputStream();
@@ -85,8 +88,12 @@ public class GoodReadsRequest {
             response.append(line);
             response.append('\r');
         }
-        rd.close();
-        return XMLToJSON(response.toString());
+        rd.close();*/
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(endURl, String.class);
+
+        return XMLToJSON(responseEntity.getBody());
     }
 
 

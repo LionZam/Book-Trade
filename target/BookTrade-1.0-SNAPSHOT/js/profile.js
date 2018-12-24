@@ -58,7 +58,7 @@ $(document).ready(function () {
             // "            <p class=\"h4\">" + book["authors"][0]["name"] + "</p>\n" +
             "            <p class=\"card-text\">" + description + "</p>\n" +
             "            <p class=\"card-text\">" + numPages + "</p>\n" +
-            "            <div class=\"d-flex justify-content-between align-items-center \">\n" +
+            "            <div class=\"d-flex justify-content-between align-items-center\">\n" +
             "                <div class=\"btn-group\">\n" +
             "                    <button type=\"button\" class=\"btn btn-sm btn-outline-danger\">Удалить</button>\n" +
             "                    <button type=\"button\" class=\"btn btn-sm btn-outline-success\" id=\"add-book\" data-id=\" " + book["id"] + " \">Добавить</button>\n" +
