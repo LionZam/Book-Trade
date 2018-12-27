@@ -63,8 +63,6 @@ public class GoodReadsRequest {
         JSONObject xmlJSONObj = null;
         try {
             xmlJSONObj = XML.toJSONObject(string).getJSONObject("GoodreadsResponse");
-            /*xmlJSONObj.put("count", count);
-            jsonPrettyPrintString = xmlJSONObj.toString(4);*/
         } catch (JSONException je) {
             System.out.println(je.toString());
         }
